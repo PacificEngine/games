@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Games</title>
+<style>
+  :root { --bg:#0f1020; --card:#1a1b33; --ink:#f2f2ff; --muted:#a9abd0; --accent:#ffb347; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family: system-ui, sans-serif; }
+  header { text-align:center; padding:48px 16px 24px; }
+  h1 { margin:0; font-size:2.5rem; letter-spacing:.04em; color:var(--accent); }
+  header p { margin:8px 0 0; color:var(--muted); }
+  main { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:24px;
+         max-width:1000px; margin:0 auto; padding:16px 24px 64px; }
+  a.card { display:block; background:var(--card); border-radius:12px; overflow:hidden;
+           color:inherit; text-decoration:none; transition:transform .15s, box-shadow .15s; }
+  a.card:hover, a.card:focus-visible { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.5);
+           outline:2px solid var(--accent); }
+  a.card img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#000; }
+  .body { padding:16px; }
+  .body h2 { margin:0 0 6px; font-size:1.2rem; }
+  .body p { margin:0; color:var(--muted); font-size:.95rem; line-height:1.4; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Claude Games</h1>
+  <p>A collection of games built with Claude. Pick one and play.</p>
+</header>
+<main id="games"></main>
+
+<script>
+const BASE = "https://pacificengine.github.io/";
+
+const GAMES = [
+  { name: "3D Maze", path: "Claude-3D-Maze/", image: "images/maze.png",
+    description: "Find your way through brick corridors to the glowing exit. Avoid the rat that sends you back to the start, and touch the gray rocks to flip gravity." },
+  { name: "Snake", path: "Claude-Snek/", image: "images/snake.png",
+    description: "Classic Snake with selectable difficulty. Steer with the arrow keys, WASD or touch controls, eat to grow, and chase your best score." },
+  { name: "Pinball", path: "Claude-Pinball/", image: "images/pinball.png",
+    description: "A Space Cadet-style pinball game with three tables, each with its own layout, look and synthesized music. Play with a keyboard or on your phone." },
+  { name: "Platformer", path: "Claude-Platformer/", image: "images/platformer.png",
+    description: "A Mario-style side-scroller with power-ups, secret blocks, warp pipes and three levels, built on HTML5 Canvas with no game engine." },
+  { name: "Virtual Pet", path: "Claude-Friend/", image: "images/pet.png",
+    description: "A Tamagotchi-style pet that hatches from an egg and grows up. Feed it, play with it, clean up after it, and don't neglect it." },
+];
+
+const root = document.getElementById("games");
+for (const g of GAMES) {
+  const a = document.createElement("a");
+  a.className = "card";
+  a.href = BASE + g.path;
+  a.innerHTML = '<img alt="" loading="lazy"><div class="body"><h2></h2><p></p></div>';
+  a.querySelector("img").src = g.image;
+  a.querySelector("h2").textContent = g.name;
+  a.querySelector("p").textContent = g.description;
+  root.appendChild(a);
+}
+</script>
+</body>
+</html>
